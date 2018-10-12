@@ -2,6 +2,8 @@ document.addEventListener( 'DOMContentLoaded', function() {
 
     console.log( 'Script loaded!' );
     handleFloatingLabel();
+    handleQualityRange();
+    handleDropdownButton();
 });
 
 
@@ -24,17 +26,44 @@ input.addEventListener('blur', function(){
 
 
 
-function handlePasswordSwitcher(){
+function togglePassword(){
 
-let passwordInput = document.querySelector(".c-password-toggle__checkbox");
-    passwordToggle = document.querySelector(".c-password-toggle__label");
+let passwordInput = document.querySelector(".js-password-input");
+    passwordToggle = document.querySelector(".js-password-toggle-checkbox");
 
 
-    if(passwordInput.checked){
+    if(passwordToggle.checked){
+        
+        passwordInput.type = ("text")
         
     }
     else{
-        
+        passwordInput.type = ("password")
     }
+
 }
 
+
+function handleQualityRange(){
+    let rangeInput = document.querySelector(".js-quality-input")
+        rangeHolder = document.querySelector(".js-range-holder")
+
+    rangeInput.addEventListener('input', function(){
+        console.log(event);
+        rangeHolder.setAttribute('data-value', rangeInput.value);
+        rangeHolder.style.marginLeft = '${ rangeInput.value }%'; 
+
+
+    });
+
+}
+
+
+function handleDropdownButton(){
+    let dropdownButton = document.querySelector('.js-dropdown-input');
+
+    dropdownButton.addEventListener('click', function(e){
+        e.preventDefault();
+        dropdownButton.classList.toggle(' is-opened');
+    })
+}
